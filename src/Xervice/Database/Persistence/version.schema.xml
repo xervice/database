@@ -1,0 +1,18 @@
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/propelorm/Propel2/master/resources/xsd/database.xsd"
+          namespace="Orm\Xervice\Database\Persistence"
+          name="default"
+>
+
+
+    <table name="version">
+        <column name="id" autoIncrement="true" required="true" primaryKey="true" type="INTEGER"/>
+        <column name="version" type="VARCHAR"/>
+
+        <unique>
+            <unique-column name="id"/>
+        </unique>
+    </table>
+
+
+</database>
