@@ -9,9 +9,9 @@ $config[DatabaseConfig::PROPEL_CONF_ADAPTER] = 'pgsql';
 
 $config[DatabaseConfig::PROPEL_CONF_HOST] = '127.0.0.1';
 $config[DatabaseConfig::PROPEL_CONF_PORT] = '5432';
-$config[DatabaseConfig::PROPEL_CONF_DBNAME] = 'mbx';
-$config[DatabaseConfig::PROPEL_CONF_USER] = 'mibexx';
-$config[DatabaseConfig::PROPEL_CONF_PASSWORD] = 'mibexx122';
+$config[DatabaseConfig::PROPEL_CONF_DBNAME] = '';
+$config[DatabaseConfig::PROPEL_CONF_USER] = '';
+$config[DatabaseConfig::PROPEL_CONF_PASSWORD] = '';
 
 
 $dsn = sprintf(
