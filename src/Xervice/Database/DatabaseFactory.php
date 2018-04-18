@@ -4,6 +4,9 @@
 namespace Xervice\Database;
 
 
+use Propel\Runtime\Connection\ConnectionManagerInterface;
+use Propel\Runtime\Connection\ConnectionManagerSingle;
+use Propel\Runtime\Propel;
 use Xervice\Database\Config\Converter\ConverterInterface;
 use Xervice\Database\Config\Converter\Json;
 use Xervice\Database\Config\Generator;
@@ -11,6 +14,8 @@ use Xervice\Database\Config\GeneratorInterface;
 use Xervice\Core\Factory\AbstractFactory;
 use Xervice\Database\Provider\PropelCommandProvider;
 use Xervice\Database\Provider\PropelCommandProviderInterface;
+use Xervice\Database\Provider\PropelProvider;
+use Xervice\Database\Provider\PropelProviderInterface;
 
 /**
  * @method \Xervice\Database\DatabaseConfig getConfig()
@@ -18,10 +23,31 @@ use Xervice\Database\Provider\PropelCommandProviderInterface;
 class DatabaseFactory extends AbstractFactory
 {
     /**
+     * @return \Xervice\Database\Provider\PropelProvider
+     * @throws \Xervice\Config\Exception\ConfigNotFound
+     */
+    public function createPropelProvider(): PropelProviderInterface
+    {
+        return new PropelProvider(
+            $this->getConfig()->getPropelConfig(),
+            $this->getPropelServiceContainer(),
+            $this->createPropelConnectionManager()
+        );
+    }
+
+    /**
+     * @return \Propel\Runtime\Connection\ConnectionManagerSingle
+     */
+    public function createPropelConnectionManager(): ConnectionManagerInterface
+    {
+        return new ConnectionManagerSingle();
+    }
+
+    /**
      * @return \Xervice\Database\Config\GeneratorInterface
      * @throws \Xervice\Config\Exception\ConfigNotFound
      */
-    public function createConfigGenerator() : GeneratorInterface
+    public function createConfigGenerator(): GeneratorInterface
     {
         return new Generator(
             $this->getConfig()->getPropelConfig(),
@@ -34,7 +60,7 @@ class DatabaseFactory extends AbstractFactory
      * @return \Xervice\Database\Provider\PropelCommandProvider
      * @throws \Xervice\Config\Exception\ConfigNotFound
      */
-    public function createPropelCommandProvider() : PropelCommandProviderInterface
+    public function createPropelCommandProvider(): PropelCommandProviderInterface
     {
         return new PropelCommandProvider(
             $this->getConfig()->getPropelCommand(),
@@ -46,8 +72,16 @@ class DatabaseFactory extends AbstractFactory
     /**
      * @return \Xervice\Database\Config\Converter\ConverterInterface
      */
-    public function createConfigConverter() : ConverterInterface
+    public function createConfigConverter(): ConverterInterface
     {
         return new Json();
+    }
+
+    /**
+     * @return \Propel\Runtime\ServiceContainer\ServiceContainerInterface
+     */
+    public function getPropelServiceContainer()
+    {
+        return Propel::getServiceContainer();
     }
 }

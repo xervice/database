@@ -19,7 +19,15 @@ class DatabaseFacadeTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
-    // tests
+    /**
+     * @group Xervice
+     * @group Database
+     * @group Facade
+     *
+     * @throws \Core\Locator\Dynamic\ServiceNotParseable
+     * @throws \Xervice\Config\Exception\ConfigNotFound
+     * @throws \Xervice\Config\Exception\FileNotFound
+     */
     public function testGenerate()
     {
         $this->getFacade()->generateConfig();
@@ -27,24 +35,13 @@ class DatabaseFacadeTest extends \Codeception\Test\Unit
     }
 
     /**
+     * @group Xervice
+     * @group Database
+     * @group Facade
+     *
      * @throws \Core\Locator\Dynamic\ServiceNotParseable
      * @throws \Xervice\Config\Exception\ConfigNotFound
      * @throws \Xervice\Config\Exception\FileNotFound
-     */
-    public function testConvert()
-    {
-        $confFile = XerviceConfig::getInstance()->getConfig()->get(DatabaseConfig::PROPEL)['propel']['paths']['phpConfDir'] . '/config.php';
-
-        if (is_file($confFile)) {
-            unlink($confFile);
-        }
-        $this->getFacade()->convertConfig();
-        $this->assertTrue(is_file($confFile));
-    }
-
-    /**
-     * @throws \Core\Locator\Dynamic\ServiceNotParseable
-     * @throws \Xervice\Config\Exception\ConfigNotFound
      */
     public function testBuildModel()
     {
@@ -58,6 +55,10 @@ class DatabaseFacadeTest extends \Codeception\Test\Unit
     }
 
     /**
+     * @group Xervice
+     * @group Database
+     * @group Facade
+     *
      * @throws \Core\Locator\Dynamic\ServiceNotParseable
      * @throws \Xervice\Config\Exception\ConfigNotFound
      */
@@ -66,19 +67,38 @@ class DatabaseFacadeTest extends \Codeception\Test\Unit
         $this->getFacade()->migrate();
     }
 
+    /**
+     * @group Xervice
+     * @group Database
+     * @group Facade
+     *
+     * @throws \Core\Locator\Dynamic\ServiceNotParseable
+     * @throws \Propel\Runtime\Exception\PropelException
+     * @throws \Xervice\Config\Exception\ConfigNotFound
+     */
     public function testSaveVersion()
     {
-        require $confFile = XerviceConfig::getInstance()->getConfig()->get(DatabaseConfig::PROPEL)['propel']['paths']['phpConfDir'] . '/config.php';
+        $this->getFacade()->initDatabase();
 
         $query = VersionQuery::create();
         $query->setDbName(null);
-        $version = $query->findById(1);
-        if ($version) {
-            $version->delete();
+        $versions = $query->findByVersion('test');
+        if ($versions->count() > 0) {
+            foreach ($versions as $version) {
+                $version->delete();
+            }
         }
 
         $version = new Version();
         $version->setVersion('test');
         $version->save();
+
+        $newId = $version->getId();
+
+        $newVersion = $query->findOneById($newId);
+        $this->assertEquals(
+            $newId,
+            $newVersion->getId()
+        );
     }
 }

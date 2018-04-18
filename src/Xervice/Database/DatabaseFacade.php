@@ -14,6 +14,18 @@ use Xervice\Core\Facade\AbstractFacade;
 class DatabaseFacade extends AbstractFacade
 {
     /**
+     * Initialize Propel database connection
+     *
+     * @api
+     *
+     * @throws \Xervice\Config\Exception\ConfigNotFound
+     */
+    public function initDatabase()
+    {
+        $this->getFactory()->createPropelProvider()->init();
+    }
+
+    /**
      * Generate propel config from project config
      *
      * @api
@@ -23,18 +35,6 @@ class DatabaseFacade extends AbstractFacade
     public function generateConfig()
     {
         $this->getFactory()->createConfigGenerator()->generate();
-    }
-
-    /**
-     * Generate propel config in propel directory
-     *
-     * @api
-     *
-     * @throws \Xervice\Config\Exception\ConfigNotFound
-     */
-    public function convertConfig()
-    {
-        $this->getFactory()->createPropelCommandProvider()->execute('config:convert');
     }
 
     /**

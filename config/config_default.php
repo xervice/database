@@ -32,9 +32,12 @@ $config[DatabaseConfig::PROPEL] = [
                     'adapter'    => $config[DatabaseConfig::PROPEL_CONF_ADAPTER],
                     'classname'  => 'Propel\Runtime\Connection\ConnectionWrapper',
                     'dsn'        => $dsn,
-                    'user'       => 'mibexx',
-                    'password'   => 'mibexx122',
-                    'attributes' => []
+                    'user'       => $config[DatabaseConfig::PROPEL_CONF_USER],
+                    'password'   => $config[DatabaseConfig::PROPEL_CONF_PASSWORD],
+                    'attributes' => [
+                        'ATTR_EMULATE_PREPARES' => false,
+                        'ATTR_TIMEOUT'          => 30,
+                    ]
                 ]
             ],
         ],

@@ -26,7 +26,6 @@ class ConfigGenerateCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->getFacade()->generateConfig();
-        $this->getFacade()->convertConfig();
     }
 
 }
