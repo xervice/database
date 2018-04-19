@@ -26,7 +26,9 @@ class ModelBuildCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->getFacade()->buildModel();
+        foreach ($this->getFacade()->buildModel() as $line) {
+            $output->write($line);
+        }
     }
 
 }

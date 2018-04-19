@@ -46,7 +46,7 @@ class DatabaseFacade extends AbstractFacade
      */
     public function buildModel()
     {
-        $this->getFactory()->createPropelCommandProvider()->execute('model:build');
+        return $this->getFactory()->createPropelCommandProvider()->execute('model:build');
     }
 
     /**
