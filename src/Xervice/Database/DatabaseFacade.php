@@ -54,11 +54,15 @@ class DatabaseFacade extends AbstractFacade
      *
      * @api
      *
+     * @return array
      * @throws \Xervice\Config\Exception\ConfigNotFound
      */
     public function migrate()
     {
-        $this->getFactory()->createPropelCommandProvider()->execute('migration:diff');
-        $this->getFactory()->createPropelCommandProvider()->execute('migration:migrate');
+        $result = $this->getFactory()->createPropelCommandProvider()->execute('migration:diff');
+        return array_merge(
+            $result,
+            $this->getFactory()->createPropelCommandProvider()->execute('migration:migrate')
+        );
     }
 }

@@ -27,7 +27,9 @@ class MigrateCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->getFacade()->migrate();
+        foreach ($this->getFacade()->migrate() as $line) {
+            $output->write($line);
+        }
     }
 
 }
