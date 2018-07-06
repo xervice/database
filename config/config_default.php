@@ -9,9 +9,9 @@ $config[DatabaseConfig::PROPEL_CONF_ADAPTER] = 'pgsql';
 
 $config[DatabaseConfig::PROPEL_CONF_HOST] = '127.0.0.1';
 $config[DatabaseConfig::PROPEL_CONF_PORT] = '5432';
-$config[DatabaseConfig::PROPEL_CONF_DBNAME] = '';
-$config[DatabaseConfig::PROPEL_CONF_USER] = '';
-$config[DatabaseConfig::PROPEL_CONF_PASSWORD] = '';
+$config[DatabaseConfig::PROPEL_CONF_DBNAME] = 'scruttest';
+$config[DatabaseConfig::PROPEL_CONF_USER] = 'scrutinizer';
+$config[DatabaseConfig::PROPEL_CONF_PASSWORD] = 'scrutinizer';
 
 
 $dsn = sprintf(

@@ -1,0 +1,6 @@
+build:
+  environment:
+    postgresql: true
+  dependencies:
+    before:
+      - psql -c "CREATE DATABASE scruttest WITH OWNER = scrutinizer ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' TEMPLATE template0"
