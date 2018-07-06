@@ -1,6 +1,9 @@
 Xervice: Database
 ==================
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/xervice/database/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/xervice/database/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/xervice/database/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/xervice/database/?branch=master)
+
 ***Default configuration***
 ```php
 <?php
