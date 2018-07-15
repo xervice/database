@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 
 namespace Xervice\Database\Command;
@@ -6,13 +7,17 @@ namespace Xervice\Database\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Process\Process;
 use Xervice\Console\Command\AbstractCommand;
 
+/**
+ * @method \Xervice\Database\DatabaseFacade getFacade()
+ */
 class MigrateCommand extends AbstractCommand
 {
-
-    protected function configure()
+    /**
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
+     */
+    protected function configure(): void
     {
         $this->setName('propel:migrate')
              ->setDescription('Migrate propel');
@@ -31,5 +36,4 @@ class MigrateCommand extends AbstractCommand
             $output->write($line);
         }
     }
-
 }

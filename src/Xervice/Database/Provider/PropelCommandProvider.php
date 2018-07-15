@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 
 namespace Xervice\Database\Provider;
@@ -47,6 +48,7 @@ class PropelCommandProvider implements PropelCommandProviderInterface
      * @param string $command
      *
      * @return array
+     * @throws \Symfony\Component\Process\Exception\LogicException
      * @throws \Symfony\Component\Process\Exception\RuntimeException
      */
     public function execute(string $command) : array
@@ -66,13 +68,11 @@ class PropelCommandProvider implements PropelCommandProviderInterface
      * @param $type
      * @param $buffer
      */
-    public function handle($type, $buffer)
+    public function handle($type, $buffer): void
     {
         $this->result[] = [
             'type' => $type,
             'buffer' => $buffer
         ];
     }
-
-
 }

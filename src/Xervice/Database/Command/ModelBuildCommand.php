@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 
 namespace Xervice\Database\Command;
@@ -6,13 +7,19 @@ namespace Xervice\Database\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Process\Process;
 use Xervice\Console\Command\AbstractCommand;
 
+/**
+ * @method \Xervice\Database\DatabaseFacade getFacade()
+ */
 class ModelBuildCommand extends AbstractCommand
 {
 
-    protected function configure()
+    /**
+     *
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
+     */
+    protected function configure(): void
     {
         $this->setName('propel:model:build')
              ->setDescription('Generate propel models');
@@ -23,6 +30,7 @@ class ModelBuildCommand extends AbstractCommand
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return int|null|void
+     * @throws \Core\Locator\Dynamic\ServiceNotParseable
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -30,5 +38,4 @@ class ModelBuildCommand extends AbstractCommand
             $output->write($line);
         }
     }
-
 }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 
 namespace Xervice\Database\Provider;
@@ -29,7 +30,7 @@ class PropelProvider implements PropelProviderInterface
      *
      * @param array $config
      * @param \Propel\Runtime\ServiceContainer\ServiceContainerInterface $serviceContainer
-     * @param \Propel\Runtime\Connection\ConnectionManagerInterface $this ->manager
+     * @param \Propel\Runtime\Connection\ConnectionManagerInterface $manager
      */
     public function __construct(
         array $config,
@@ -41,7 +42,7 @@ class PropelProvider implements PropelProviderInterface
         $this->manager = $manager;
     }
 
-    public function init()
+    public function init(): void
     {
         $this->createManager();
         $this->configure();

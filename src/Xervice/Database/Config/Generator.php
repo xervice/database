@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 
 namespace Xervice\Database\Config;
@@ -38,12 +39,17 @@ class Generator implements GeneratorInterface
         $this->converter = $converter;
     }
 
-
-    public function generate()
+    /**
+     * @throws \Xervice\Database\Config\Exception\DatabaseConfigException
+     */
+    public function generate(): void
     {
         if (!is_dir($this->confDir)) {
             throw new DatabaseConfigException('Config path not exist: ' . $this->confDir);
         }
-        file_put_contents($this->confDir . '/propel.json', $this->converter->convert($this->config));
+        file_put_contents(
+            $this->confDir . '/propel.json',
+            $this->converter->convert($this->config)
+        );
     }
 }

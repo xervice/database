@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 
 namespace Xervice\Database;
@@ -8,27 +9,26 @@ use Xervice\Core\Config\AbstractConfig;
 
 class DatabaseConfig extends AbstractConfig
 {
-    const PROPEL = 'propel';
+    public const PROPEL = 'propel';
 
-    const PROPEL_CONF_DIR = 'propel.conf.dir';
+    public const PROPEL_CONF_DIR = 'propel.conf.dir';
 
-    const PROPEL_CONF_ADAPTER = 'propel.conf.adapter';
+    public const PROPEL_CONF_ADAPTER = 'propel.conf.adapter';
 
-    const PROPEL_CONF_HOST = 'propel.conf.host';
+    public const PROPEL_CONF_HOST = 'propel.conf.host';
 
-    const PROPEL_CONF_PORT = 'propel.conf.port';
+    public const PROPEL_CONF_PORT = 'propel.conf.port';
 
-    const PROPEL_CONF_DBNAME = 'propel.conf.dbname';
+    public const PROPEL_CONF_DBNAME = 'propel.conf.dbname';
 
-    const PROPEL_CONF_USER = 'propel.conf.user';
+    public const PROPEL_CONF_USER = 'propel.conf.user';
 
-    const PROPEL_CONF_PASSWORD = 'propel.conf.password';
+    public const PROPEL_CONF_PASSWORD = 'propel.conf.password';
 
-    const PROPEL_COMMAND = 'propel.command';
+    public const PROPEL_COMMAND = 'propel.command';
 
     /**
      * @return array
-     * @throws \Xervice\Config\Exception\ConfigNotFound
      */
     public function getPropelConfig() : array
     {
@@ -37,7 +37,6 @@ class DatabaseConfig extends AbstractConfig
 
     /**
      * @return string
-     * @throws \Xervice\Config\Exception\ConfigNotFound
      */
     public function getConfDir() : string
     {
@@ -46,7 +45,6 @@ class DatabaseConfig extends AbstractConfig
 
     /**
      * @return string
-     * @throws \Xervice\Config\Exception\ConfigNotFound
      */
     public function getPropelCommand() : string
     {

@@ -1,10 +1,10 @@
 <?php
+declare(strict_types=1);
 
 
 namespace Xervice\Database;
 
 
-use Symfony\Component\Process\Process;
 use Xervice\Core\Facade\AbstractFacade;
 
 /**
@@ -17,10 +17,8 @@ class DatabaseFacade extends AbstractFacade
      * Initialize Propel database connection
      *
      * @api
-     *
-     * @throws \Xervice\Config\Exception\ConfigNotFound
      */
-    public function initDatabase()
+    public function initDatabase(): void
     {
         $this->getFactory()->createPropelProvider()->init();
     }
@@ -29,10 +27,8 @@ class DatabaseFacade extends AbstractFacade
      * Generate propel config from project config
      *
      * @api
-     *
-     * @throws \Xervice\Config\Exception\ConfigNotFound
      */
-    public function generateConfig()
+    public function generateConfig(): void
     {
         $this->getFactory()->createConfigGenerator()->generate();
     }
@@ -42,9 +38,9 @@ class DatabaseFacade extends AbstractFacade
      *
      * @api
      *
-     * @throws \Xervice\Config\Exception\ConfigNotFound
+     * @return array
      */
-    public function buildModel()
+    public function buildModel(): array
     {
         return $this->getFactory()->createPropelCommandProvider()->execute('model:build');
     }
@@ -55,9 +51,8 @@ class DatabaseFacade extends AbstractFacade
      * @api
      *
      * @return array
-     * @throws \Xervice\Config\Exception\ConfigNotFound
      */
-    public function migrate()
+    public function migrate(): array
     {
         $result = $this->getFactory()->createPropelCommandProvider()->execute('migration:diff');
         return array_merge(

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 
 namespace Xervice\Database;
@@ -7,6 +8,7 @@ namespace Xervice\Database;
 use Propel\Runtime\Connection\ConnectionManagerInterface;
 use Propel\Runtime\Connection\ConnectionManagerSingle;
 use Propel\Runtime\Propel;
+use Propel\Runtime\ServiceContainer\ServiceContainerInterface;
 use Xervice\Database\Config\Converter\ConverterInterface;
 use Xervice\Database\Config\Converter\Json;
 use Xervice\Database\Config\Generator;
@@ -24,7 +26,6 @@ class DatabaseFactory extends AbstractFactory
 {
     /**
      * @return \Xervice\Database\Provider\PropelProvider
-     * @throws \Xervice\Config\Exception\ConfigNotFound
      */
     public function createPropelProvider(): PropelProviderInterface
     {
@@ -45,7 +46,6 @@ class DatabaseFactory extends AbstractFactory
 
     /**
      * @return \Xervice\Database\Config\GeneratorInterface
-     * @throws \Xervice\Config\Exception\ConfigNotFound
      */
     public function createConfigGenerator(): GeneratorInterface
     {
@@ -58,7 +58,6 @@ class DatabaseFactory extends AbstractFactory
 
     /**
      * @return \Xervice\Database\Provider\PropelCommandProvider
-     * @throws \Xervice\Config\Exception\ConfigNotFound
      */
     public function createPropelCommandProvider(): PropelCommandProviderInterface
     {
@@ -80,7 +79,7 @@ class DatabaseFactory extends AbstractFactory
     /**
      * @return \Propel\Runtime\ServiceContainer\ServiceContainerInterface
      */
-    public function getPropelServiceContainer()
+    public function getPropelServiceContainer(): ServiceContainerInterface
     {
         return Propel::getServiceContainer();
     }
