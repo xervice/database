@@ -70,3 +70,7 @@ $config[DatabaseConfig::PROPEL] = [
     ]
 ];
 ```
+
+If you want to use a query container class, you can add the DatabaseHelper to the core module helper list.
+After that you cann create a class "MyModuleQueryContainer" in your module root. The class must implement the QueryContainerInterface.
+You can add that class in your dependency provider by getting it from the locator.
