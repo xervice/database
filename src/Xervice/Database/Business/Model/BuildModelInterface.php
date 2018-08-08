@@ -5,7 +5,7 @@ namespace Xervice\Database\Business\Model;
 interface BuildModelInterface
 {
     /**
-     *
+     * @return array
      */
-    public function buildModel();
+    public function buildModel(): array;
 }

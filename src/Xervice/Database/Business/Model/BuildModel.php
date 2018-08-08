@@ -41,9 +41,9 @@ class BuildModel implements BuildModelInterface
     }
 
     /**
-     *
+     * @return array
      */
-    public function buildModel()
+    public function buildModel(): array
     {
         if (!is_dir($this->schemaTarget)) {
             if (!mkdir($this->schemaTarget, 0777) && !is_dir($this->schemaTarget)) {
@@ -59,6 +59,6 @@ class BuildModel implements BuildModelInterface
             }
         }
 
-        $this->propelCommandProvider->execute('model:build');
+        return $this->propelCommandProvider->execute('model:build');
     }
 }
