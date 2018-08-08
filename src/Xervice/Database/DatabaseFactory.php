@@ -9,6 +9,8 @@ use Propel\Runtime\Connection\ConnectionManagerInterface;
 use Propel\Runtime\Connection\ConnectionManagerSingle;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ServiceContainer\ServiceContainerInterface;
+use Xervice\Database\Business\Model\BuildModel;
+use Xervice\Database\Business\Model\BuildModelInterface;
 use Xervice\Database\Config\Converter\ConverterInterface;
 use Xervice\Database\Config\Converter\Json;
 use Xervice\Database\Config\Generator;
@@ -24,6 +26,19 @@ use Xervice\Database\Provider\PropelProviderInterface;
  */
 class DatabaseFactory extends AbstractFactory
 {
+    /**
+     * @return \Xervice\Database\Business\Model\BuildModelInterface
+     */
+    public function createBuildModel(): BuildModelInterface
+    {
+        return new BuildModel(
+            $this->createPropelCommandProvider(),
+            $this->getConfig()->getSchemaPaths(),
+            $this->getConfig()->getSchemaTarget()
+        );
+    }
+
+
     /**
      * @return \Xervice\Database\Provider\PropelProvider
      */

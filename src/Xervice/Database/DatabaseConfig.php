@@ -27,6 +27,26 @@ class DatabaseConfig extends AbstractConfig
 
     public const PROPEL_COMMAND = 'propel.command';
 
+    public const SCHEMA_PATHS = 'propel.schema.path';
+
+    public const SCHEMA_TARGET = 'propel.schema.target';
+
+    /**
+     * @return string
+     */
+    public function getSchemaTarget(): string
+    {
+        return $this->get(self::SCHEMA_TARGET, '');
+    }
+
+    /**
+     * @return array
+     */
+    public function getSchemaPaths(): array
+    {
+        return $this->get(self::SCHEMA_PATHS, []);
+    }
+
     /**
      * @return array
      */

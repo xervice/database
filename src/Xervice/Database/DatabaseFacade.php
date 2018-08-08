@@ -23,7 +23,7 @@ class DatabaseFacade extends AbstractFacade
         $this->getFactory()->createPropelProvider()->init();
     }
 
-    /**
+    /**git tag
      * Generate propel config from project config
      *
      * @api
@@ -42,7 +42,7 @@ class DatabaseFacade extends AbstractFacade
      */
     public function buildModel(): array
     {
-        return $this->getFactory()->createPropelCommandProvider()->execute('model:build');
+        return $this->getFactory()->createBuildModel()->buildModel();
     }
 
     /**
