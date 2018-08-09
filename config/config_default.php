@@ -18,6 +18,7 @@ $config[DatabaseConfig::SCHEMA_PATHS] = [
 ];
 
 $config[DatabaseConfig::SCHEMA_TARGET] = dirname(__DIR__) . '/src/Orm/Schema';
+$config[DatabaseConfig::SCHEMA_PATTERN] = '.testschema.xml';
 
 
 $dsn = sprintf(

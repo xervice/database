@@ -25,6 +25,11 @@ class BuildModel implements BuildModelInterface
     private $schemaTarget;
 
     /**
+     * @var string
+     */
+    private $schemaPattern;
+
+    /**
      * BuildModel constructor.
      *
      * @param \Xervice\Database\Provider\PropelCommandProviderInterface $propelCommandProvider
@@ -33,11 +38,13 @@ class BuildModel implements BuildModelInterface
     public function __construct(
         PropelCommandProviderInterface $propelCommandProvider,
         array $schemaPaths,
-        string $schemaTarget
+        string $schemaTarget,
+        string $schemaPattern
     ) {
         $this->propelCommandProvider = $propelCommandProvider;
         $this->schemaPaths = $schemaPaths;
         $this->schemaTarget = $schemaTarget;
+        $this->schemaPattern = $schemaPattern;
     }
 
     /**
@@ -53,9 +60,10 @@ class BuildModel implements BuildModelInterface
 
         foreach ($this->schemaPaths as $schemaPath) {
             $finder = new Finder();
-            $finder->files()->name('*.schema.xml')->in($schemaPath);
+            $finder->files()->name('*' . $this->schemaPattern)->in($schemaPath);
             foreach ($finder as $schemaFile) {
-                copy($schemaFile->getRealPath(), $this->schemaTarget . '/' . basename($schemaFile->getRealPath()));
+                $targetFilename = str_replace($this->schemaPattern, '.schema.xml', basename($schemaFile->getRealPath()));
+                copy($schemaFile->getRealPath(), $this->schemaTarget . '/' . $targetFilename);
             }
         }
 

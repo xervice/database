@@ -34,7 +34,8 @@ class DatabaseFactory extends AbstractFactory
         return new BuildModel(
             $this->createPropelCommandProvider(),
             $this->getConfig()->getSchemaPaths(),
-            $this->getConfig()->getSchemaTarget()
+            $this->getConfig()->getSchemaTarget(),
+            $this->getConfig()->getSchemaPattern()
         );
     }
 
