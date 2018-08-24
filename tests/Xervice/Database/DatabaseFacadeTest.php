@@ -3,8 +3,8 @@ namespace XerviceTest\Database;
 
 use Orm\Xervice\Database\Persistence\Version;
 use Orm\Xervice\Database\Persistence\VersionQuery;
-use Xervice\Config\XerviceConfig;
-use Xervice\Core\Locator\Dynamic\DynamicLocator;
+use Xervice\Config\Business\XerviceConfig;
+use Xervice\Core\Business\Model\Locator\Dynamic\Business\DynamicBusinessLocator;
 use Xervice\Database\DatabaseConfig;
 
 /**
@@ -12,7 +12,7 @@ use Xervice\Database\DatabaseConfig;
  */
 class DatabaseFacadeTest extends \Codeception\Test\Unit
 {
-    use DynamicLocator;
+    use DynamicBusinessLocator;
 
     /**
      * @var \XerviceTest\XerviceTester
@@ -23,30 +23,27 @@ class DatabaseFacadeTest extends \Codeception\Test\Unit
      * @group Xervice
      * @group Database
      * @group Facade
-     *
-     * @throws \Core\Locator\Dynamic\ServiceNotParseable
-     * @throws \Xervice\Config\Exception\ConfigNotFound
-     * @throws \Xervice\Config\Exception\FileNotFound
      */
     public function testGenerate()
     {
         $this->getFacade()->generateConfig();
-        $this->assertTrue(file_exists(XerviceConfig::getInstance()->getConfig()->get(DatabaseConfig::PROPEL_CONF_DIR) . '/propel.json'));
+        $this->assertTrue(file_exists(XerviceConfig::get(DatabaseConfig::PROPEL_CONF_DIR) . '/propel.json'));
     }
 
     /**
      * @group Xervice
      * @group Database
      * @group Facade
-     *
-     * @throws \Core\Locator\Dynamic\ServiceNotParseable
-     * @throws \Xervice\Config\Exception\ConfigNotFound
-     * @throws \Xervice\Config\Exception\FileNotFound
      */
     public function testBuildModel()
     {
         $this->getFacade()->buildModel();
-        $this->assertTrue(is_dir(XerviceConfig::getInstance()->getConfig()->get(DatabaseConfig::PROPEL)['propel']['paths']['phpDir'] . '/Orm/Xervice/Database'));
+        $this->assertTrue(
+            \is_dir(
+                XerviceConfig::get(DatabaseConfig::PROPEL)['propel']['paths']['phpDir']
+                . '/Orm/Xervice/Database'
+            )
+        );
 
         $version = new VersionQuery();
         $this->assertInstanceOf(VersionQuery::class, $version);
@@ -58,9 +55,6 @@ class DatabaseFacadeTest extends \Codeception\Test\Unit
      * @group Xervice
      * @group Database
      * @group Facade
-     *
-     * @throws \Core\Locator\Dynamic\ServiceNotParseable
-     * @throws \Xervice\Config\Exception\ConfigNotFound
      */
     public function testMigrate()
     {
@@ -71,10 +65,6 @@ class DatabaseFacadeTest extends \Codeception\Test\Unit
      * @group Xervice
      * @group Database
      * @group Facade
-     *
-     * @throws \Core\Locator\Dynamic\ServiceNotParseable
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Xervice\Config\Exception\ConfigNotFound
      */
     public function testSaveVersion()
     {

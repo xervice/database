@@ -2,15 +2,15 @@
 declare(strict_types=1);
 
 
-namespace Xervice\Database\Command;
+namespace Xervice\Database\Communication\Console\Command;
 
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Xervice\Console\Command\AbstractCommand;
+use Xervice\Console\Business\Model\Command\AbstractCommand;
 
 /**
- * @method \Xervice\Database\DatabaseFacade getFacade()
+ * @method \Xervice\Database\Business\DatabaseFacade getFacade()
  */
 class ModelBuildCommand extends AbstractCommand
 {
@@ -30,7 +30,6 @@ class ModelBuildCommand extends AbstractCommand
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return int|null|void
-     * @throws \Core\Locator\Dynamic\ServiceNotParseable
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

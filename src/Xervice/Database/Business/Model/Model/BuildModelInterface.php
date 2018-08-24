@@ -1,6 +1,6 @@
 <?php
 
-namespace Xervice\Database\Business\Model;
+namespace Xervice\Database\Business\Model\Model;
 
 interface BuildModelInterface
 {

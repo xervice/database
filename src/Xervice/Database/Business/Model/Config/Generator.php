@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 
-namespace Xervice\Database\Config;
+namespace Xervice\Database\Business\Model\Config;
 
 
-use Xervice\Database\Config\Converter\ConverterInterface;
-use Xervice\Database\Config\Exception\DatabaseConfigException;
+use Xervice\Database\Business\Exception\DatabaseConfigException;
+use Xervice\Database\Business\Model\Config\Converter\ConverterInterface;
 
 class Generator implements GeneratorInterface
 {
@@ -40,7 +40,7 @@ class Generator implements GeneratorInterface
     }
 
     /**
-     * @throws \Xervice\Database\Config\Exception\DatabaseConfigException
+     * @throws \Xervice\Database\Business\Exception\DatabaseConfigException
      */
     public function generate(): void
     {

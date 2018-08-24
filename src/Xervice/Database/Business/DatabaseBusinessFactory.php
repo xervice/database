@@ -2,32 +2,32 @@
 declare(strict_types=1);
 
 
-namespace Xervice\Database;
+namespace Xervice\Database\Business;
 
 
 use Propel\Runtime\Connection\ConnectionManagerInterface;
 use Propel\Runtime\Connection\ConnectionManagerSingle;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ServiceContainer\ServiceContainerInterface;
-use Xervice\Database\Business\Model\BuildModel;
-use Xervice\Database\Business\Model\BuildModelInterface;
-use Xervice\Database\Config\Converter\ConverterInterface;
-use Xervice\Database\Config\Converter\Json;
-use Xervice\Database\Config\Generator;
-use Xervice\Database\Config\GeneratorInterface;
-use Xervice\Core\Factory\AbstractFactory;
-use Xervice\Database\Provider\PropelCommandProvider;
-use Xervice\Database\Provider\PropelCommandProviderInterface;
-use Xervice\Database\Provider\PropelProvider;
-use Xervice\Database\Provider\PropelProviderInterface;
+use Xervice\Core\Business\Model\Factory\AbstractBusinessFactory;
+use Xervice\Database\Business\Model\Config\Converter\ConverterInterface;
+use Xervice\Database\Business\Model\Config\Converter\Json;
+use Xervice\Database\Business\Model\Config\Generator;
+use Xervice\Database\Business\Model\Config\GeneratorInterface;
+use Xervice\Database\Business\Model\Model\BuildModel;
+use Xervice\Database\Business\Model\Model\BuildModelInterface;
+use Xervice\Database\Business\Model\Provider\PropelCommandProvider;
+use Xervice\Database\Business\Model\Provider\PropelCommandProviderInterface;
+use Xervice\Database\Business\Model\Provider\PropelProvider;
+use Xervice\Database\Business\Model\Provider\PropelProviderInterface;
 
 /**
  * @method \Xervice\Database\DatabaseConfig getConfig()
  */
-class DatabaseFactory extends AbstractFactory
+class DatabaseBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @return \Xervice\Database\Business\Model\BuildModelInterface
+     * @return \Xervice\Database\Business\Model\Model\BuildModelInterface
      */
     public function createBuildModel(): BuildModelInterface
     {
@@ -41,7 +41,7 @@ class DatabaseFactory extends AbstractFactory
 
 
     /**
-     * @return \Xervice\Database\Provider\PropelProvider
+     * @return \Xervice\Database\Business\Model\Provider\PropelProviderInterface
      */
     public function createPropelProvider(): PropelProviderInterface
     {
@@ -61,7 +61,7 @@ class DatabaseFactory extends AbstractFactory
     }
 
     /**
-     * @return \Xervice\Database\Config\GeneratorInterface
+     * @return \Xervice\Database\Business\Model\Config\GeneratorInterface
      */
     public function createConfigGenerator(): GeneratorInterface
     {
@@ -73,19 +73,19 @@ class DatabaseFactory extends AbstractFactory
     }
 
     /**
-     * @return \Xervice\Database\Provider\PropelCommandProvider
+     * @return \Xervice\Database\Business\Model\Provider\PropelCommandProviderInterface
      */
     public function createPropelCommandProvider(): PropelCommandProviderInterface
     {
         return new PropelCommandProvider(
             $this->getConfig()->getPropelCommand(),
-            $this->getConfig()->get('APPLICATION_PATH'),
+            $this->getConfig()->getApplicationPath(),
             $this->getConfig()->getConfDir()
         );
     }
 
     /**
-     * @return \Xervice\Database\Config\Converter\ConverterInterface
+     * @return \Xervice\Database\Business\Model\Config\Converter\ConverterInterface
      */
     public function createConfigConverter(): ConverterInterface
     {

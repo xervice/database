@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace Xervice\Database\Provider;
+namespace Xervice\Database\Business\Model\Provider;
 
 
 use Propel\Runtime\Connection\ConnectionManagerInterface;

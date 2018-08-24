@@ -1,14 +1,12 @@
 <?php
 declare(strict_types=1);
 
+namespace Xervice\Database\Business;
 
-namespace Xervice\Database;
-
-
-use Xervice\Core\Facade\AbstractFacade;
+use Xervice\Core\Business\Model\Facade\AbstractFacade;
 
 /**
- * @method \Xervice\Database\DatabaseFactory getFactory()
+ * @method \Xervice\Database\Business\DatabaseBusinessFactory getFactory()
  * @method \Xervice\Database\DatabaseConfig getConfig()
  */
 class DatabaseFacade extends AbstractFacade

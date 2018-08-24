@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace Xervice\Database\Provider;
+namespace Xervice\Database\Business\Model\Provider;
 
 
 use Symfony\Component\Process\Process;
@@ -65,8 +65,8 @@ class PropelCommandProvider implements PropelCommandProviderInterface
     }
 
     /**
-     * @param $type
-     * @param $buffer
+     * @param mixed $type
+     * @param mixed $buffer
      */
     public function handle($type, $buffer): void
     {

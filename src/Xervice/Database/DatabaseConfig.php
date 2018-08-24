@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Xervice\Database;
 
 
-use Xervice\Core\Config\AbstractConfig;
+use Xervice\Config\Business\XerviceConfig;
+use Xervice\Core\Business\Model\Config\AbstractConfig;
 
 class DatabaseConfig extends AbstractConfig
 {
@@ -68,5 +69,13 @@ class DatabaseConfig extends AbstractConfig
     public function getPropelCommand() : string
     {
         return $this->get(self::PROPEL_COMMAND, 'vendor/bin/propel');
+    }
+
+    /**
+     * @return string
+     */
+    public function getApplicationPath(): string
+    {
+        return $this->get(XerviceConfig::APPLICATION_PATH);
     }
 }

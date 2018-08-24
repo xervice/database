@@ -1,16 +1,16 @@
 <?php
 
 
-namespace Xervice\Database\Business\Model;
+namespace Xervice\Database\Business\Model\Model;
 
 
 use Symfony\Component\Finder\Finder;
-use Xervice\Database\Provider\PropelCommandProviderInterface;
+use Xervice\Database\Business\Model\Provider\PropelCommandProviderInterface;
 
 class BuildModel implements BuildModelInterface
 {
     /**
-     * @var \Xervice\Database\Provider\PropelCommandProviderInterface
+     * @var \Xervice\Database\Business\Model\Provider\PropelCommandProviderInterface
      */
     private $propelCommandProvider;
 
@@ -32,7 +32,7 @@ class BuildModel implements BuildModelInterface
     /**
      * BuildModel constructor.
      *
-     * @param \Xervice\Database\Provider\PropelCommandProviderInterface $propelCommandProvider
+     * @param \Xervice\Database\Business\Model\Provider\PropelCommandProviderInterface $propelCommandProvider
      * @param array $schemaPaths
      */
     public function __construct(
@@ -62,8 +62,12 @@ class BuildModel implements BuildModelInterface
             $finder = new Finder();
             $finder->files()->name('*' . $this->schemaPattern)->in($schemaPath);
             foreach ($finder as $schemaFile) {
-                $targetFilename = str_replace($this->schemaPattern, '.schema.xml', basename($schemaFile->getRealPath()));
-                copy($schemaFile->getRealPath(), $this->schemaTarget . '/' . $targetFilename);
+                $targetFilename = str_replace(
+                    $this->schemaPattern,
+                    '.schema.xml',
+                    basename((string)$schemaFile->getRealPath())
+                );
+                copy((string)$schemaFile->getRealPath(), $this->schemaTarget . '/' . $targetFilename);
             }
         }
 
