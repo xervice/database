@@ -9,9 +9,9 @@ $config[DatabaseConfig::PROPEL_CONF_ADAPTER] = 'pgsql';
 
 $config[DatabaseConfig::PROPEL_CONF_HOST] = '127.0.0.1';
 $config[DatabaseConfig::PROPEL_CONF_PORT] = '5432';
-$config[DatabaseConfig::PROPEL_CONF_DBNAME] = 'scruttest';
-$config[DatabaseConfig::PROPEL_CONF_USER] = 'scrutinizer';
-$config[DatabaseConfig::PROPEL_CONF_PASSWORD] = 'scrutinizer';
+$config[DatabaseConfig::PROPEL_CONF_DBNAME] = 'dockerci';
+$config[DatabaseConfig::PROPEL_CONF_USER] = 'dockerci';
+$config[DatabaseConfig::PROPEL_CONF_PASSWORD] = 'dockerci';
 
 $config[DatabaseConfig::SCHEMA_PATHS] = [
     dirname(__DIR__) . '/src'

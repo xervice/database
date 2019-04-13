@@ -1,18 +1,21 @@
 <?php
 namespace XerviceTest\Database;
 
+use function foo\func;
 use Orm\Xervice\Database\Persistence\Version;
 use Orm\Xervice\Database\Persistence\VersionQuery;
 use Xervice\Config\Business\XerviceConfig;
 use Xervice\Core\Business\Model\Locator\Dynamic\Business\DynamicBusinessLocator;
+use Xervice\Database\Business\Transaction\DatabaseTransactionTrait;
 use Xervice\Database\DatabaseConfig;
 
 /**
- * @method \Xervice\Database\DatabaseFacade getFacade()
+ * @method \Xervice\Database\Business\DatabaseFacade getFacade()
  */
 class DatabaseFacadeTest extends \Codeception\Test\Unit
 {
     use DynamicBusinessLocator;
+    use DatabaseTransactionTrait;
 
     /**
      * @var \XerviceTest\XerviceTester
@@ -65,6 +68,7 @@ class DatabaseFacadeTest extends \Codeception\Test\Unit
      * @group Xervice
      * @group Database
      * @group Facade
+     * @throws \Throwable
      */
     public function testSaveVersion()
     {
@@ -79,9 +83,13 @@ class DatabaseFacadeTest extends \Codeception\Test\Unit
             }
         }
 
+
         $version = new Version();
-        $version->setVersion('test');
-        $version->save();
+
+        $this->useTransaction(function () use ($version) {
+            $version->setVersion('test');
+            $version->save();
+        });
 
         $newId = $version->getId();
 
