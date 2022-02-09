@@ -18,7 +18,7 @@
     "xervice/kernel": "^2.0.0",
     "xervice/data-provider": "^2.0.0",
     "symfony/finder": "^4.0.0",
-    "propel/propel": "2.0.0-alpha8"
+    "propel/propel": "2.0.0-beta1"
   },
   "autoload": {
     "psr-4": {
